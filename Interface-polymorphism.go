@@ -6,8 +6,8 @@ import (
 )
 
 func main() {
-
-	rect := Rectangle{20,50}
+    
+    rect := Rectangle{20,50}
     circ := Circle{4}
 
     fmt.Println("Rectangle Area =", getArea(rect))
