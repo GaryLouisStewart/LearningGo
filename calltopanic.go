@@ -16,4 +16,3 @@ func demonstratePanic(){
 
 	panic("ABORT ABORT ABORT!")
 }
-
