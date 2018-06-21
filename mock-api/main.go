@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"encoding/json"
+	"io"
 )
 
 type Person struct {
@@ -59,6 +60,12 @@ func DeletePersonEndpoint(w http.ResponseWriter, req *http.Request){
 
 }
 
+func HealthCheckHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+	io.WriteString(w, `{"alive": true}`)
+}
+
 
 func main(){
 
@@ -69,6 +76,7 @@ func main(){
 	router.HandleFunc("/people/{id}", GetPersonEndpoint).Methods("GET")
 	router.HandleFunc("/people/{id}", CreatePersonEndpoint).Methods("POST")
 	router.HandleFunc("/people/{id}", DeletePersonEndpoint).Methods("DELETE")
+	router.HandleFunc("/health", HealthCheckHandler)
 
-	log.Fatal(http.ListenAndServe(":1111", router))
+	log.Fatal(http.ListenAndServe("localhost:1111", router))
 }
