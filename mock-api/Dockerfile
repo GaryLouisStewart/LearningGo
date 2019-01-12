@@ -14,6 +14,8 @@ COPY ./mock-api /opt/mock-api
 
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 
+EXPOSE 1111
+
 CMD ["start"]
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
