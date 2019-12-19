@@ -20,7 +20,7 @@
 ## Making a portable build using docker
 
 - set the following variables *BUILDTIME_IMAGE, BUILDTIME_VERSION, DKR_IMG_NAME*
-- run this `docker build --build-arg $BUILDTIME_IMAGE --build-arg $BUILDTIME_VERSION --name $DKR_IMG_NAME .`
-- Start the docker image `docker run $DKR_IMAGE_NAME -p 1111:1111`
+- run this `docker build -t <image_name>.`
+- Start the docker image `docker run -d <image_name> -p 1111:1111`
 - The contaier should now be accessible at localhost:1111
 ---
