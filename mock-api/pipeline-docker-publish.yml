@@ -1,0 +1,23 @@
+resources:
+- name: mock-api-build 
+  type: git
+  source:
+    uri: https://github.com/GaryLouisStewart/LearningGo
+    branch: master
+- name: psynapse/mock-api
+  type: docker-image
+  source:
+    email: ((docker-hub-email))
+    username: ((docker-hub-username))
+    password: ((docker-hub-password))
+    repository: ((docker-hub-username))/mock-api
+
+jobs:
+- name: publish
+  public: true
+  serial: true
+  plan:
+  - get: mock-api-build
+  - put: psynapse/mock-api
+    params:
+      build: LearningGo/mock-api/Dockerfile

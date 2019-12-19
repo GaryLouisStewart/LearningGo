@@ -1,0 +1,47 @@
+resources:
+- name: container-resource
+  type: time
+  source:
+    interval: 60m
+
+jobs:
+- name: golang-mockapi-testing
+  plan:
+  - get: container-resource
+    trigger: true
+  - task: golang-tasks
+    params:
+      OWNER: Gary
+    config:
+      platform: linux
+      image_resource: 
+        type: "docker-image"
+        source:
+          repository: golang
+          tag: '1.13-alpine'
+      run:
+        path: /bin/sh
+        args:
+        - -c
+        - |
+          echo "Installing prereqs: apk update & git"
+          apk update && apk add git curl
+          echo "Cloning repo: https://github.com/GaryLouisStewart/LearningGo"
+          git clone https://github.com/GaryLouisStewart/LearningGo
+          echo "Changing DIR: LearningGo/mock-api/"
+          cd LearningGo/mock-api/
+          echo "Building API: mock-api"
+          go build
+          echo "Running: mock api as a daemon in the background"
+          ./mock-api &
+          echo "Testing api: With curl "
+          curl -X GET \
+            http://127.0.0.1:1111/people/1 \
+            -H 'Accept: */*' \
+            -H 'Accept-Encoding: gzip, deflate' \
+            -H 'Cache-Control: no-cache' \
+            -H 'Connection: keep-alive' \
+            -H 'Host: 127.0.0.1:1111' \
+            -H 'Postman-Token: eb2c2923-9b80-4411-bcc9-3a9c359b3b0e,994991bd-59cf-4314-b77f-c2943886119b' \
+            -H 'User-Agent: PostmanRuntime/7.15.2' \
+            -H 'cache-control: no-cache'
