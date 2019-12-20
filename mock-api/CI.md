@@ -20,7 +20,7 @@ This should be: 127.0.0.1:8080
 ```
 Login: fly --target golang login --concourse-url http://127.0.0.1:8080 -u test -p test
 
-Push: fly -t ci set-pipeline -p golang -c pipeline.yaml
+Push: fly -t ci set-pipeline -p golang -c pipeline.yml
 
-unpause pipeline: fly -t golang unpause-pipeline -p golang 
+unpause pipeline: fly -t golang unpause-pipeline -p golang
 ```
