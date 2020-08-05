@@ -1,6 +1,6 @@
 package main
 
-import "github.com/GaryLouisStewart/LearningGo/MVC/app/app"
+import "github.com/GaryLouisStewart/LearningGo/MVC/app"
 
 func main() {
 	app.StartApp()
