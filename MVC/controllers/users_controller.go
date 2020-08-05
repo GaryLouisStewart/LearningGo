@@ -4,4 +4,6 @@ import (
 	"net/http"
 )
 
-func GetUser(http.ResponseWriter, *http.Request) {}
+func GetUser(http.ResponseWriter, *http.Request) {
+
+}
